@@ -1,0 +1,69 @@
+﻿@using System.Globalization;
+@model IEnumerable<Car>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Minha garagem</title>
+</head>
+<body>
+    <h1>Carros na garagem</h1>
+    <p>
+        <!-- uso de TagHelpers para definir o Controller e a Action -->
+        <a asp-controller="Cars" asp-action="Cadastrar">Novo Carro</a>
+    </p>
+
+    <!-- Verifica se a chave "Mensagem" existe no TempData -->
+    @if (@TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <!-- Imprime para o usuário a mensagem -->
+        @TempData["Mensagem"]
+        </div>
+    }
+
+
+    <table class="table" border="1">
+        <tr>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Valor</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.Brand</label>
+                </td>
+                <td>
+                    <label>@item.Model</label>
+                </td>
+                <td>
+                    <label>@item.Value.ToString("C", CultureInfo.CreateSpecificCulture("pt-BR"))</label>
+                </td>
+                <td>
+
+                    <!-- asp-route-id é usado para informar o Id do Item selecionado. -->
+                    <a asp-controller="Cars"
+                   asp-action="Editar"
+                   asp-route-id="@item.Id">Editar</a>
+
+                    <a asp-controller="Cars"
+                   asp-action="Consultar"
+                   asp-route-id="@item.Id">Consultar</a>
+
+                    <a asp-controller="Cars"
+                   asp-action="Excluir"
+                   asp-route-id="@item.Id">Excluir</a>
+
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

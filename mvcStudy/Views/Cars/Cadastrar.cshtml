@@ -1,0 +1,62 @@
+﻿@model mvcStudy.Models.Car
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tipo de Produto - Cadastrar</title>
+</head>
+<body>
+    <h1>Tipo de Produto - Cadastrar</h1>
+
+    <!-- formulário HTML com Tag Helpers-->
+    <form asp-action="Cadastrar" asp-controller="Cars" method="post">
+        <div class="form-horizontal">
+            <hr />
+            <!-- Trecho de validação para se existe mensagem a ser exibida -->
+            @if (!Html.ViewData.ModelState.IsValid)
+            {
+                    <!-- Tag para exibição da lista de erros -->
+                    <div asp-validation-summary="All" class="alert alert-danger"></div>
+            }
+
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model"/>
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" />
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="reset" value="Limpar" class="btn btn-default" />
+                    <!-- HTML Simple para envio dos dados do formulário -->
+                    <input type="submit" value="Cadastrar" class="btn btn-default" />
+                </div>
+            </div>
+            <hr />
+        </div>
+    </form>
+    <div>
+        <a asp-controller="TipoProduto" asp-action="Index">Voltar</a>
+    </div>
+</body>
+</html>
