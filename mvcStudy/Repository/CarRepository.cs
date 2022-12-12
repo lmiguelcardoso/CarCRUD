@@ -5,6 +5,9 @@ using System.Reflection.Metadata;
 
 namespace mvcStudy.Repository
 {
+    // execute nonquery = insert
+    //execute escalar = um registro
+    //execute reader = varios registros
     public class CarRepository
     {
         public string ConnectionString { get; set; }
@@ -54,7 +57,6 @@ namespace mvcStudy.Repository
                     newcar.Id = (int)dr["id"];
                     list.Add(newcar);
                 }
-                connection.Close();
                 return list;
             }
         }
